@@ -1,11 +1,23 @@
 //CreatePost.js
 import React, { useState } from 'react'
+import { connect } from 'react-redux';
+import { addPost } from '../JS/Actions/actions';
 
-const CreatePost = () => {
+const mapDispatchToProps = dispatch => {
+    return {
+        addArticle: post => dispatch(addPost(post))
+    }
+}
+const CreatePost = (props) => {
     const [title, setTitle] = useState('')
     const [content, setContent] = useState('');
     const handleSubmit = (e) => {
         e.preventDefault()
+        props.addArticle({
+            id: Date.now(),
+            title,
+            content
+        })
     }
     return (
         <form onSubmit={handleSubmit}>
@@ -27,4 +39,4 @@ const CreatePost = () => {
     )
 }
 
-export default CreatePost
+export default connect(null, mapDispatchToProps)(CreatePost)

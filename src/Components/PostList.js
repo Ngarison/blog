@@ -1,6 +1,12 @@
 //PostList.js
 import React from 'react'
+import { connect } from 'react-redux'
 
+const mapStateToProps = state => {
+    return {
+        posts: state.posts
+    }
+}
 const PostList = (props) => {
     return (
         <div>
@@ -12,4 +18,4 @@ const PostList = (props) => {
     )
 }
 
-export default PostList
+export default connect(mapStateToProps)(PostList)
